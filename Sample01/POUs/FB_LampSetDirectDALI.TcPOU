@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_LampSetDirectDALI" Id="{508b93c0-0778-4ff1-aedf-858d8647b6a3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC FB_LampSetDirectDALI
+VAR
+	nLightLevel			: BYTE;
+	_nOperatingTime		: DINT;
+	tonDelay			: TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (nLightLevel > 0) THEN
+	tonDelay(IN := TRUE, PT := T#1S);
+	IF (tonDelay.Q) THEN
+		tonDelay(IN := FALSE);
+		_nOperatingTime := _nOperatingTime + 1;
+	END_IF
+ELSE
+	tonDelay(IN := FALSE);
+END_IF
+]]></ST>
+    </Implementation>
+    <Property Name="nOperatingTime" Id="{62d392a4-ac0b-46a0-b328-e579ec751c57}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY PUBLIC nOperatingTime : DINT]]></Declaration>
+      <Get Name="Get" Id="{329a3336-a875-4ed5-8e94-b64093512612}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[nOperatingTime := _nOperatingTime;
+
+]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{193ef73e-2d46-4bd6-be4a-aedf24d1322f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_nOperatingTime := nOperatingTime;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="SetLightLevel" Id="{fcb47fde-6ee2-43a2-b668-4bd49ce3e7e1}">
+      <Declaration><![CDATA[// Sets the control value of the DALI lamp to a value between 0 and 254.
+METHOD PUBLIC SetLightLevel
+VAR_INPUT
+	nNewLightLevel		: BYTE(0..254);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nLightLevel := nNewLightLevel;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_LampSetDirectDALI">
+      <LineId Id="3" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LampSetDirectDALI.nOperatingTime.Get">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LampSetDirectDALI.nOperatingTime.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_LampSetDirectDALI.SetLightLevel">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

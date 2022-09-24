@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="MAIN" Id="{ef33b4c1-c95d-4cf8-b9bf-7d346bd93484}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbController				: FB_Controller();
+	fbLampOnOffAdapter			: FB_LampOnOffAdapter();
+	fbLampSetDirectAdapter		: FB_LampSetDirectAdapter();
+	fbLampUpDownAdapter			: FB_LampUpDownAdapter();
+	fbLampSetDirectDALIAdapter	: FB_LampSetDirectDALIAdapter();	
+	nSetLamp					: INT;
+	bDimUp, bDimDown			: BOOL;
+	bOff, bOn					: BOOL;
+	nLightLevel					: BYTE;
+	bGet, bReset				: BOOL;
+	nOperatingTime				: DINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE nSetLamp OF
+	1:
+		fbController.refActiveLamp REF= fbLampOnOffAdapter;
+		nSetLamp := 0;
+	2:
+		fbController.refActiveLamp REF= fbLampSetDirectAdapter;
+		nSetLamp := 0;
+	3:
+		fbController.refActiveLamp REF= fbLampUpDownAdapter;
+		nSetLamp := 0;
+	4:
+		fbController.refActiveLamp REF= fbLampSetDirectDALIAdapter;
+		nSetLamp := 0;
+END_CASE
+
+fbController();
+
+IF (bGet) THEN
+	IF (fbController.nOperatingTime >= 0) THEN
+		nOperatingTime := fbController.nOperatingTime;
+	ELSE
+		// service not supported
+	END_IF
+	bGet := FALSE;
+END_IF
+IF (bReset) THEN
+	fbController.nOperatingTime := 0;
+	nOperatingTime := fbController.nOperatingTime;
+	bReset := FALSE;
+END_IF
+
+nLightLevel := fbController.fbActualValue.nValue;
+
+IF (bDimUp) THEN
+	fbController.DimUp();
+	bDimUp := FALSE;
+END_IF
+
+IF (bDimDown) THEN
+	fbController.DimDown();
+	bDimDown := FALSE;
+END_IF
+
+IF (bOff) THEN
+	fbController.Off();
+	bOff := FALSE;
+END_IF
+
+IF (bOn) THEN
+	fbController.On();
+	bOn := FALSE;
+END_IF
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
