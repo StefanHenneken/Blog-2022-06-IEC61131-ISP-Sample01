@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{c1296a96-b16d-4ddc-bab2-94807968f2d0}</ProjectGuid>
     <SubObjectsSortedByName>True</SubObjectsSortedByName>
-    <Name>Sample03</Name>
+    <Name>Sample01</Name>
     <ProgramVersion>3.1.4020.10</ProgramVersion>
     <Application>{70d9fa36-c37c-4ac9-8ed2-dad4dff96f28}</Application>
     <TypeSystem>{8eac653e-6de8-4aac-8541-d9860d82862b}</TypeSystem>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="FB_Lamp" Id="{97bddd59-a325-4ddf-9d6f-0fca30c94781}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK PUBLIC ABSTRACT FB_Lamp IMPLEMENTS I_Subject, I_Lamp
 VAR
@@ -46,7 +46,9 @@ METHOD PUBLIC ABSTRACT DimUp
       </Implementation>
     </Method>
     <Property Name="nOperatingTime" Id="{80eb94f3-0571-44f7-ae6d-57f89950abb9}">
-      <Declaration><![CDATA[PROPERTY PUBLIC nOperatingTime : DINT]]></Declaration>
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+// Operating Time [s]
+PROPERTY PUBLIC nOperatingTime : DINT]]></Declaration>
       <Get Name="Get" Id="{98ae3e24-5b98-4327-8471-58b2409ab04a}">
         <Declaration><![CDATA[VAR
 END_VAR

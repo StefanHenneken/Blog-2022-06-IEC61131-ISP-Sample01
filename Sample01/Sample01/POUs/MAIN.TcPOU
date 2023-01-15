@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <POU Name="MAIN" Id="{ef33b4c1-c95d-4cf8-b9bf-7d346bd93484}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
@@ -7,11 +7,11 @@ VAR
 	fbLampOnOffAdapter			: FB_LampOnOffAdapter();
 	fbLampSetDirectAdapter		: FB_LampSetDirectAdapter();
 	fbLampUpDownAdapter			: FB_LampUpDownAdapter();
-	fbLampSetDirectDALIAdapter	: FB_LampSetDirectDALIAdapter();	
+	fbLampSetDirectDALIAdapter	: FB_LampSetDirectDALIAdapter();
 	nSetLamp					: INT;
 	bDimUp, bDimDown			: BOOL;
 	bOff, bOn					: BOOL;
-	nLightLevel					: BYTE;
+	nLightLevel					: USINT;
 	bGet, bReset				: BOOL;
 	nOperatingTime				: DINT;
 END_VAR

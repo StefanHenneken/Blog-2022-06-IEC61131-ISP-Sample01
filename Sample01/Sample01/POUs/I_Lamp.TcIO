@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <Itf Name="I_Lamp" Id="{40d65e5d-c62e-4ae9-99b2-81cac6219b58}">
     <Declaration><![CDATA[INTERFACE I_Lamp
 ]]></Declaration>
@@ -18,7 +18,8 @@ END_VAR
 ]]></Declaration>
     </Method>
     <Property Name="nOperatingTime" Id="{2529d51c-2a42-40df-9c55-e6f306dd3721}">
-      <Declaration><![CDATA[PROPERTY nOperatingTime : DINT]]></Declaration>
+      <Declaration><![CDATA[// Operating Time [s]
+PROPERTY nOperatingTime : DINT]]></Declaration>
       <Get Name="Get" Id="{d2660ea6-f030-46fb-bc97-09b38c4d5a90}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
